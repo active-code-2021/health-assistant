@@ -9,14 +9,14 @@
 <body>
     <script>
         window.watsonAssistantChatOptions = {
-            integrationID: "b6ab552d-3a30-409b-b143-762735fc0a08", // The ID of this integration.
-            region: "eu-gb", // The region your integration is hosted in.
-            serviceInstanceID: "c7182bf5-2097-42f2-adbe-39f0598ad2d9", // The ID of your service instance.
+            integrationID: process.env.INTEGRATIONID_WOTSON, // The ID of this integration FROM ENV.
+            region: process.env.REGION_WOTSON, // The region your integration is hosted in.
+            serviceInstanceID:process.env.SERVICEINSTANCEID_WOTSON, // The ID of your service instance.
             onLoad: function(instance) { instance.render(); }
           };
         setTimeout(function(){
           const t=document.createElement('script');
-          t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+          t.src=process.env.SRC_WOTSON;
           document.head.appendChild(t);
         });
       </script>
