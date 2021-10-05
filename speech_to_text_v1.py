@@ -5,19 +5,19 @@ from ibm_watson.websocket import RecognizeCallback, AudioSource
 import threading
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 
-authenticator = IAMAuthenticator(
-   process.env.IAMAUTHENTIATOR_STT)
+authenticator = IAMAuthenticator("nKrI3BBoFjUeKgZ40Mjd4Wf8dIFf0f7z36WD7hP7Tl4_")
 authenticator.set_disable_ssl_verification(True)
 service = SpeechToTextV1(authenticator=authenticator)
 service.set_service_url(
-    process.env.URL_STT)
+    'https://api.eu-gb.speech-to-text.watson.cloud.ibm.com/instances/b9125aa5-b317-4650-b4d2-3bcd6b48e521'
+)
 service.set_disable_ssl_verification(True)
 
 def spt():
-    with open(join(process.env.AUDIO_SAVEIN_STT, process.env.AUDIO_PLACE_STT), 'rb') as audio_file:
+    with open(join(dirname(__file__), './speech.wav'), 'rb') as audio_file:
         result = service.recognize(audio=audio_file,
         content_type='audio/wav').get_result()
-        return process.env.RESULT_STT
+        return result["results"][0]["alternatives"][0]["transcript"]
 
 # def sptxt():
 #       with open(join(dirname(__file__), './speech.wav'),
